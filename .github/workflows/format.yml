@@ -1,0 +1,49 @@
+name: Format Code
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**/*.py'
+      - 'tests/**/*.py'
+
+jobs:
+  format:
+    name: Format Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+          cache: 'pip'
+      
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      
+      - name: Install dependencies
+        run: poetry install --no-interaction
+      
+      - name: Run Black
+        run: poetry run black src tests
+      
+      - name: Run Ruff format
+        run: poetry run ruff format src tests
+      
+      - name: Commit changes
+        if: github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --staged --quiet || git commit -m "Auto-format code [skip ci]"
+          git push
+
+
