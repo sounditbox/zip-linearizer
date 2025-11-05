@@ -30,51 +30,11 @@ Zip Linearizer is a command-line tool for extracting text content from ZIP archi
 ### Installation with Poetry (recommended)
 
 ```bash
-# Install Poetry (if not already installed)
-curl -sSL https://install.python-poetry.org | python3 -
-
-# Clone repository
-git clone <repository-url>
+git clone https://github.com/sounditbox/zip-linearizer
 cd zip_linealizer
+poetry install --no-root
 
-# Install dependencies
-poetry install
-
-# Activate virtual environment
-poetry shell
 ```
-
-### Installation without Poetry
-
-```bash
-# Clone repository
-git clone <repository-url>
-cd zip_linealizer
-
-# Create virtual environment (recommended)
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install package in development mode (optional)
-pip install -e .
-```
-
-### Direct dependency installation
-
-If you don't want to install the package as a module, you can just install dependencies:
-
-```bash
-pip install requests
-```
-
 And run the script directly:
 
 ```bash
@@ -86,14 +46,7 @@ python -m zip_linearizer.core.cli archive.zip
 ### Basic usage
 
 ```bash
-# With Poetry
 poetry run zip-linearizer sample.zip
-
-# Without Poetry (if package is installed)
-zip-linearizer sample.zip
-
-# Without Poetry (direct module execution)
-python -m zip_linearizer.core.cli sample.zip
 ```
 
 This will create a `sample.linearized.txt` file with the contents of all text files from the archive.

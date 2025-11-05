@@ -1,2 +1,1 @@
-# Основные зависимости для Zip Linearizer
 requests>=2.31.0
