@@ -292,4 +292,4 @@ MIT License
 
 ## Author
 
-Your Name
+Ruslan Mutygullin
